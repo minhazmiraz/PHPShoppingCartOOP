@@ -24,10 +24,15 @@ class Cart
     public function addProduct(Product $product, int $quantity): CartItem
     {
         //TODO Implement method
-        if(in_array($product, $this->item))
-        $cartItem = new CartItem($product, $quantity);
-        $this->items[] = $cartItem;
-        return $cartItem;
+        $exist = array_search($product, $this->items);
+        if($exist){
+            $exist->increaseQuantity($product, $product->getQuantity() + getQuantity());
+            return $exist;
+        } else{
+            $cartItem = new CartItem($product, $quantity);
+            $this->items[] = $cartItem;
+            return $cartItem;
+        }
     }
 
     /**
